@@ -1,64 +1,81 @@
+import './App.css'
+
 const Header = (props) => {
-  return <h1>{props.course}</h1>
+  return (
+    <header className="header">
+      <h1>{props.course}</h1>
+    </header>
+  )
 }
 
 const Part = (props) => {
   return (
-    <p>
-      {props.part.name} {props.part.exercises}
-    </p>
+    <div className="part-item">
+      <span className="part-name">{props.part.name}</span>
+      <span className="part-units">{props.part.exercises} units</span>
+    </div>
   )
 }
 
 const Content = (props) => {
   return (
     <div>
-      <Part part={props.part1} />
-      <Part part={props.part2} />
-      <Part part={props.part3} />
+      <Part part={props.parts[0]} />
+      <Part part={props.parts[1]} />
+      <Part part={props.parts[2]} />
     </div>
   )
 }
 
 const Total = (props) => {
-  return <p>Number of units {props.sum}</p>
+  const totalUnits = props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises
+  return (
+    <div className="total">
+      Number of units: {totalUnits}
+    </div>
+  )
 }
 
 const Footer = (props) => {
   return (
-    <p>
-      {props.name} - {props.code} - {props.section}
-    </p>
+    <footer className="footer">
+      <p>
+        {props.name} - {props.code} - {props.section}
+      </p>
+    </footer>
   )
 }
 
 const App = () => {
   const course = 'BS Information Technology'
 
-  // Refactored to Objects
-  const part1 = {
-    name: 'Technopreneurship',
-    exercises: 3
-  }
-  const part2 = {
-    name: 'Project Management for IT',
-    exercises: 3
-  }
-  const part3 = {
-    name: 'The Life and Works of Rizal',
-    exercises: 3
-  }
+  const parts = [
+    {
+      name: 'Technopreneurship',
+      exercises: 3
+    },
+    {
+      name: 'Project Management for IT',
+      exercises: 3
+    },
+    {
+      name: 'The Life and Works of Rizal',
+      exercises: 3
+    }
+  ]
 
   const studentName = 'Laura Margaret C. Escasinas'
   const courseCode = 'CSIT340'
   const section = 'G7'
 
   return (
-    <div>
-      <Header course={course} />
-      <Content part1={part1} part2={part2} part3={part3} />
-      <Total sum={part1.exercises + part2.exercises + part3.exercises} />
-      <Footer name={studentName} code={courseCode} section={section} />
+    <div className="app-container">
+      <div className="card">
+        <Header course={course} />
+        <Content parts={parts} />
+        <Total parts={parts} />
+        <Footer name={studentName} code={courseCode} section={section} />
+      </div>
     </div>
   )
 }
