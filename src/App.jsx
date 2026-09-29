@@ -3,7 +3,7 @@ import './App.css'
 const Header = (props) => {
   return (
     <header className="header">
-      <h1>{props.course}</h1>
+      <h1>{props.course.name}</h1>
     </header>
   )
 }
@@ -28,12 +28,11 @@ const Content = (props) => {
 }
 
 const Total = (props) => {
-  const totalUnits = props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises
-  return (
-    <div className="total">
-      Number of units: {totalUnits}
-    </div>
-  )
+  const totalUnits =
+    props.parts[0].exercises +
+    props.parts[1].exercises +
+    props.parts[2].exercises
+  return <div className="total">Number of units: {totalUnits}</div>
 }
 
 const Footer = (props) => {
@@ -47,22 +46,23 @@ const Footer = (props) => {
 }
 
 const App = () => {
-  const course = 'BS Information Technology'
-
-  const parts = [
-    {
-      name: 'Technopreneurship',
-      exercises: 3
-    },
-    {
-      name: 'Project Management for IT',
-      exercises: 3
-    },
-    {
-      name: 'The Life and Works of Rizal',
-      exercises: 3
-    }
-  ]
+  const course = {
+    name: 'BS Information Technology',
+    parts: [
+      {
+        name: 'Technopreneurship',
+        exercises: 3
+      },
+      {
+        name: 'Project Management for IT',
+        exercises: 3
+      },
+      {
+        name: 'The Life and Works of Rizal',
+        exercises: 3
+      }
+    ]
+  }
 
   const studentName = 'Laura Margaret C. Escasinas'
   const courseCode = 'CSIT340'
@@ -72,8 +72,8 @@ const App = () => {
     <div className="app-container">
       <div className="card">
         <Header course={course} />
-        <Content parts={parts} />
-        <Total parts={parts} />
+        <Content parts={course.parts} />
+        <Total parts={course.parts} />
         <Footer name={studentName} code={courseCode} section={section} />
       </div>
     </div>
