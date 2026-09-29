@@ -5,7 +5,7 @@ const Header = (props) => {
 const Part = (props) => {
   return (
     <p>
-      {props.part} {props.exercises}
+      {props.part.name} {props.part.exercises}
     </p>
   )
 }
@@ -13,9 +13,9 @@ const Part = (props) => {
 const Content = (props) => {
   return (
     <div>
-      <Part part={props.part1} exercises={props.exercises1} />
-      <Part part={props.part2} exercises={props.exercises2} />
-      <Part part={props.part3} exercises={props.exercises3} />
+      <Part part={props.part1} />
+      <Part part={props.part2} />
+      <Part part={props.part3} />
     </div>
   )
 }
@@ -34,12 +34,20 @@ const Footer = (props) => {
 
 const App = () => {
   const course = 'BS Information Technology'
-  const part1 = 'Technopreneurship'
-  const exercises1 = 3
-  const part2 = 'Project Management for IT'
-  const exercises2 = 3
-  const part3 = 'The Life and Works of Rizal'
-  const exercises3 = 3
+
+  // Refactored to Objects
+  const part1 = {
+    name: 'Technopreneurship',
+    exercises: 3
+  }
+  const part2 = {
+    name: 'Project Management for IT',
+    exercises: 3
+  }
+  const part3 = {
+    name: 'The Life and Works of Rizal',
+    exercises: 3
+  }
 
   const studentName = 'Laura Margaret C. Escasinas'
   const courseCode = 'CSIT340'
@@ -48,15 +56,8 @@ const App = () => {
   return (
     <div>
       <Header course={course} />
-      <Content
-        part1={part1}
-        exercises1={exercises1}
-        part2={part2}
-        exercises2={exercises2}
-        part3={part3}
-        exercises3={exercises3}
-      />
-      <Total sum={exercises1 + exercises2 + exercises3} />
+      <Content part1={part1} part2={part2} part3={part3} />
+      <Total sum={part1.exercises + part2.exercises + part3.exercises} />
       <Footer name={studentName} code={courseCode} section={section} />
     </div>
   )
